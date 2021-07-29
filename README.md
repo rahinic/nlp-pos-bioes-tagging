@@ -1,8 +1,8 @@
 # Neural Network POS and BIOES Tagging 
 
 ## Models:
--- POS Tagging: https://github.com/rahinic/WSJ-POS-tagger
--- BIOES Tagging: https://github.com/rahinic/syntax-parsing-lstm
+- POS Tagging: https://github.com/rahinic/WSJ-POS-tagger
+- BIOES Tagging: https://github.com/rahinic/syntax-parsing-lstm
 
 ## Necessary Packages: 
 pickle, pytorch, numpy
