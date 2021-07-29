@@ -1,10 +1,8 @@
-# Syntax Parsing with Recurrent Neural Network
+# Neural Network POS and BIOES Tagging 
 
-## Dataset: 
-CoNLL-2003 dataset for NER tagging. The IOB tagging scheme were converted to BIOES using the repo: https://github.com/rahinic/BIO-to-BIOES-tagger
-
-## Neural Network Model: 
-Using a supervised many-to-many LSTM model, the neural network tags the tokens and corresponsing POS tags to BIOES tagging scheme with 91.25% accuracy.
+## Models:
+-- POS Tagging: https://github.com/rahinic/WSJ-POS-tagger
+-- BIOES Tagging: https://github.com/rahinic/syntax-parsing-lstm
 
 ## Necessary Packages: 
 pickle, pytorch, numpy
