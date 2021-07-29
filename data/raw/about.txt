@@ -1,4 +1,4 @@
 
 1. Saved weights from nn model #1: POS tagging model trained with Penn Treebank dataset<PennPOSmodel.pth>. Accuracy: ~79% as of 29.07.2021
 2. Saved weights from nn model #2: BIOES tagging model trained with CoNLL2003 dataset<ConLLBIOESmodel.pth>. Accuracy: ~95% as of 29.07.2021
-3. Penn Treebank validation dataset <23.auto.clean.txt>
+3. Validation dataset <23.auto.clean.txt>
