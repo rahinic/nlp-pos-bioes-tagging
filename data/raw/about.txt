@@ -1,1 +1,10 @@
-CoNLL-2003 dataset for BIOES/NER tagging: https://www.aclweb.org/anthology/W03-0419/
+1. Penn Treebank dictionaries:
+(a) word-to-index and index-to-word look-up tables: (<nn1_wsj_word_to_idx.pkl> and <nn1_wsj_idx_to_word.pkl>)
+(b) pos-to-index and index-to-pos look-up tables: (<nn1_wsj_pos_to_idx.pkl> and <nn1_wsj_idx_to_pos.pkl>)
+-------------------------------
+2. ConLL2003 dataset:
+(a) word-to-index table: <nn2_ConLL2003_vocabulary.pkl>
+(b) pos_tags-to-index table: <nn2_ConLL2003_pos_tags.pkl>
+(a) bioes_tags-to-index table: <nn2_ConLL2003_bioes_tags.pkl>
+-------------------------------
+3. Penn Treebank validation dataset: <PennTreeBankValid.pklz>
