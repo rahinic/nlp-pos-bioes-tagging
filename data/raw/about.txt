@@ -9,9 +9,3 @@
 (a) bioes_tags-to-index table: <nn2_ConLL2003_bioes_tags.pkl>
 -------------------------------
 3. Penn Treebank validation dataset: <PennTreeBankValid.pklz>
-=======
-
-1. Saved weights from nn model #1: POS tagging model trained with Penn Treebank dataset<PennPOSmodel.pth>. Accuracy: ~79% as of 29.07.2021
-2. Saved weights from nn model #2: BIOES tagging model trained with CoNLL2003 dataset<ConLLBIOESmodel.pth>. Accuracy: ~95% as of 29.07.2021
-3. Validation dataset <23.auto.clean.txt>
->>>>>>> dda58f95d775798461072ead64f0506eaa5aaa90
