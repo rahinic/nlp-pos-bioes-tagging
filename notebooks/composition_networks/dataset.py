@@ -95,23 +95,25 @@ class composeDataset(Dataset):
         skipped = 0
         for idx, sample in enumerate(samples):
 
-            if len(sample)>6:
+            if len(sample)>20:
                 continue
             
             label = sample[0]
+            # print(sample[1])
 
             sentence, pos_tags = [], []
 
             #split sentence and pos tags
-            for i in range(0,len(sample),2):
+            for i in range(0,len(sample[1]),2):
+
                 try:
                     pos_tags.append(sample[1][i])
                     sentence.append(sample[1][i+1])
                 except IndexError:
                     continue
-                
-            if len(sentence)<5:
-                for i in range(0,5-len(sentence)):
+
+            if len(sentence)<20:
+                for i in range(0,20-len(sentence)):
                     sentence.append('PADDING')
                     pos_tags.append('PADDING')
             
@@ -123,8 +125,9 @@ class composeDataset(Dataset):
                 label_to_idx = self.composition_tags[label]
             except KeyError:
                 skipped = skipped+1
-                print(f"skipped {skipped} lines so far:")
+                # print(f"skipped {skipped} lines so far:")
                 continue
+
             final_sample = [a + b for a, b in zip(sentence_to_idx, pos_to_idx)]
 
             sample_as_tensor = torch.tensor(final_sample)
@@ -140,13 +143,13 @@ class composeDataset(Dataset):
     def __init__(self, myDataset=None):
 
         self.myDataset = myDataset
-        print(self.myDataset)
+        # print(self.myDataset)
 
         # Step 1: look-up tables:
         print("Loading Penn Treebank look-up tables...")
         self.composition_tags, self.composition_tags_reverse = self.fetchLookupTables()
         self.penn_vocab, _, _, self.penn_pos_tags = self.fetchWordsAndPOSLookupTables()
-        print(self.penn_pos_tags.keys())
+        
         print("done!")
 
         # Step 2: Fetching Pre-processed dataset:
@@ -164,8 +167,6 @@ class composeDataset(Dataset):
 
     def __len__(self):
 
-        print(f"Total number of samples in this {self.myDataset} dataset: {len(self.final_dataset)}")
-
         return len(self.final_dataset)
 
     def __getitem__(self, idx) :
@@ -176,26 +177,4 @@ class composeDataset(Dataset):
     
 ###################################################################
 
-validation_dataset = DataLoader(dataset=composeDataset(myDataset="validation"),
-                                batch_size=64,
-                                shuffle=True)
 
-for idx, sample in enumerate(validation_dataset):
-    print(sample)
-# print("Fetching Penn Treebank look-up tables...")
-
-# fetch = composeDataset()
-# composition_tags, composition_tags_reverse = fetch.fetchLookupTables()
-# penn_vocab, penn_pos_tags, penn_vocab_reverse, penn_pos_tags_reverse = fetch.fetchWordsAndPOSLookupTables()
-# print("done!")
-# print("Fetching cleaned-raw dataset...")
-# cleanedDataset = fetch.fetchDirtyDataset(dataset="validation")
-# print("done!")
-# prettyDataset = []
-# for dataset in cleanedDataset:
-#     prettyDataset.append(fetch.cleanDirtyDataset(dataset))
-
-# final_dataset_text = fetch.prepareTensors(prettyDataset)
-# print(len(final_dataset_text))
-# print(final_dataset_text[:10])
-# print('-'*100)

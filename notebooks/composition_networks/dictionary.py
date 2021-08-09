@@ -96,11 +96,7 @@ for type in all_chunk_types:
                                                             chunk_size=size)))) # NP phrases
   
 all_phrases_final = list(filter(None, all_phrases))
-# print(len(all_phrases_final))
-# print(all_phrases_final[-1][:5])
-
-# sentences = ds.fetch_corpus(corpus_type="validation")
-# print(sentences[5])
+#############################################################################
 
         
 
