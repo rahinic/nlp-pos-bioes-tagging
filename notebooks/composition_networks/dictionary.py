@@ -22,6 +22,8 @@ class compositionNetworksDataset():
         return content
 
     def fetch_corpus(self,corpus_type):
+
+        print(f"loading the {corpus_type} dataset")
         import sys
 
         types = ['train','test','validation']
@@ -44,6 +46,7 @@ class compositionNetworksDataset():
     def prepare_sentences(self,corpus_type):
 
         corpus_dataset = self.fetch_corpus(corpus_type)
+        
         
 
         #import dict
@@ -93,8 +96,8 @@ for type in all_chunk_types:
                                                             chunk_size=size)))) # NP phrases
   
 all_phrases_final = list(filter(None, all_phrases))
-print(len(all_phrases_final))
-print(all_phrases_final[-1][:5])
+# print(len(all_phrases_final))
+# print(all_phrases_final[-1][:5])
 
 # sentences = ds.fetch_corpus(corpus_type="validation")
 # print(sentences[5])
