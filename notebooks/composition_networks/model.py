@@ -1,7 +1,7 @@
 from torch import nn
 import torch
 
-"""RNN Many-to-one multi-class classification neural network model framework design"""
+"""RNN Sentence chunks classification (NP/VP/PP etc.) NN model"""
 
 class RNNCompositionNetwork(nn.Module):
 
@@ -30,14 +30,14 @@ class RNNCompositionNetwork(nn.Module):
 
 
     def forward(self, sample):
-        # print(sample.size())
-        embedded = self.embedding(sample)
-        # print(embedded.size())
+        
+        embedded = self.embedding(sample) #embedding layer
+        
         output, (hidden, cell) = self.lstm(embedded)
 
         #concat the final forward and backward hidden state
-        hidden = torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1)
-        # print(hidden.size())
+        hidden = torch.cat((hidden[-1,:,:], hidden[0,:,:]), dim = 1)
+        
 
         dense_output = self.fc(hidden)
 

@@ -5,7 +5,7 @@ import torch
 from dataset import composeDataset
 from dictionary import compositionNetworksTagSets
 from model import RNNCompositionNetwork
-import pickle, time
+import pickle, time, gzip
 ##########################################################################################
 ################################# 01.TRain/Test Dataset ##################################
 
@@ -53,11 +53,11 @@ penn_vocab, _, _, penn_pos_tags = fetchWordsAndPOSLookupTables()
 ################################# 02.Model Parameters ####################################
 VOCAB_SIZE = len(penn_vocab)+len(penn_pos_tags)+1
 EMBED_DIM = 100
-HIDDEN_DIM = 32
-NUM_LAYERS = 2
-NUM_OF_CLASSES = len(composition_tags)+1
+HIDDEN_DIM = 64
+NUM_LAYERS = 1
+NUM_OF_CLASSES = len(composition_tags)
 EPOCHS = 10
-LEARNING_RATE = 0.2
+LEARNING_RATE = 0.02
 BATCH_SIZE = 16
 ################################### 02. NN Model  #######################################
 print("03. builing the model...")
@@ -65,7 +65,7 @@ model = RNNCompositionNetwork(embedding_dimension= EMBED_DIM,
                             vocabulary_size=VOCAB_SIZE,
                             hidden_dimension=HIDDEN_DIM,
                             num_of_layers=NUM_LAYERS,
-                            dropout=0.2,
+                            dropout=0,
                             output_dimension=NUM_OF_CLASSES)
 print("----------------------------------------------------------------")
 print("Done! here is our model:")
@@ -74,9 +74,8 @@ print("----------------------------------------------------------------")
 ##########################################################################################
 ############################# 03. Optimizer and Loss  #################################
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') 
-# optimizer = optim.Adam(model.parameters())
-optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
-criterion = nn.CrossEntropyLoss(ignore_index=46393)
+optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE)
+criterion = nn.CrossEntropyLoss() #ignore_index=46393
 
 def binary_accuracy(preds, y):
     #round predictions to the closest integer
@@ -115,7 +114,7 @@ def train(model, dataset, optimizer, criterion):
        
        current_samples = sample[1]
        current_labels = sample[0]
-    #    print(current_samples[:5])
+    
        optimizer.zero_grad()
 
        predicted_labels = model(current_samples)
